@@ -90,6 +90,7 @@ export default function Body() {
                     setDisplayedNum(previouseNum - displayedNum)
                     setPreviouseNum(displayedNum)
                 }
+                
                 break;
             case "clear":
                 setDisplayedNum(0)                
@@ -97,9 +98,11 @@ export default function Body() {
                 default:
                     alert("You Lose the Game")
            } 
+          
 
         }
-    
+        
+        console.log(previouseNum)
 
     return (<>
         <Container className="bodyContainer">
@@ -110,3 +113,5 @@ export default function Body() {
     </>)
 
 };
+
+// left off figuring out how to add to a number after alreadying using an operator
