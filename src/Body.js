@@ -8,21 +8,30 @@ export default function Body() {
         const [displayedNum, setDisplayedNum] = useState(0);
         const [operator, setOperator] = useState("");
         const [previouseNum, setPreviouseNum] = useState(0)
-        
+
+       function isInt(n){
+        return Number(n) === n && n % 1 ===0;
+       }
+       
+    
         const handleDisplayedNum = (e) => {
             if(displayedNum === 0) {
                 if(e.target.value === '.'){
-                    let num = displayedNum + '.';
-                    console.log(num)
-                    parseFloat(num)
-                    console.log(typeof num)
-                    setDisplayedNum(num)
-                } else {setDisplayedNum(Number(e.target.value))}
+                    if( isInt(displayedNum) === true) {
+                        let num = displayedNum + '.';
+                        setDisplayedNum(num)
+                    } 
+
+                } else {
+                    setDisplayedNum(Number(e.target.value))
+                }
             } else {
                 if(e.target.value === '.'){
-                    let num = displayedNum + '.';
-                    parseFloat(num)
-                    setDisplayedNum(num)
+                    if( isInt(displayedNum) === true) {
+                        let num = displayedNum + '.';
+                        setDisplayedNum(num)
+                    }
+                
                 } else{
                 let newNum = displayedNum + e.target.value
                 setDisplayedNum(Number(newNum))
@@ -40,9 +49,10 @@ export default function Body() {
                 break;
             case "+/-":
                 if(Math.sign(displayedNum) === 1) {
-                    setDisplayedNum("-" + displayedNum)
-                } else {
-                    setDisplayedNum(displayedNum.slice(1))
+                    setDisplayedNum(-Math.abs(displayedNum))
+                }else {
+                    setDisplayedNum(Math.abs(displayedNum))
+                    
                 }
                 break;
             case "%":
@@ -79,18 +89,18 @@ export default function Body() {
             case "=":
                 if(operator === '/') {
                     setDisplayedNum(previouseNum / displayedNum)
-                    setPreviouseNum(displayedNum)
+                    
                 }else if (operator === 'X') {
                     setDisplayedNum(previouseNum * displayedNum)
-                    setPreviouseNum(displayedNum)
+                    
                 } else if (operator === '+') {
                     setDisplayedNum(previouseNum + displayedNum)
-                    setPreviouseNum(displayedNum)
+                    
                 } else if (operator === '-') {
                     setDisplayedNum(previouseNum - displayedNum)
-                    setPreviouseNum(displayedNum)
+                    
                 }
-                
+                setPreviouseNum(displayedNum)
                 break;
             case "clear":
                 setDisplayedNum(0)                
@@ -99,10 +109,10 @@ export default function Body() {
                     alert("You Lose the Game")
            } 
           
-
+           setPreviouseNum(displayedNum)
         }
+        console.log()
         
-        console.log(previouseNum)
 
     return (<>
         <Container className="bodyContainer">
