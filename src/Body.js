@@ -62,28 +62,28 @@ export default function Body() {
                 if(previouseNum === 0) {
                     setPreviouseNum(displayedNum)
                 } 
-                setDisplayedNum('')
+                setDisplayedNum(0)
                 setOperator("/")
                 break;
             case "X":
                 if(previouseNum === 0) {
                     setPreviouseNum(displayedNum)
                 }
-                setDisplayedNum('')
+                setDisplayedNum(0)
                 setOperator('X')
                 break;
             case "-":
                 if(previouseNum === 0) {
                     setPreviouseNum(displayedNum)
                 }
-                setDisplayedNum('')
+                setDisplayedNum(0)
                 setOperator('-')
                 break;
             case "+":
                 if(previouseNum === 0) {
                 setPreviouseNum(displayedNum)
                 }
-                setDisplayedNum('')
+                setDisplayedNum(0)
                 setOperator('+')
                 break;
             case "=":
@@ -100,7 +100,7 @@ export default function Body() {
                     setDisplayedNum(previouseNum - displayedNum)
                     
                 }
-                setPreviouseNum(displayedNum)
+                
                 break;
             case "clear":
                 setDisplayedNum(0)                
