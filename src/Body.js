@@ -5,53 +5,46 @@ import {Container} from 'react-bootstrap';
 
 
 export default function Body() {
-        const [displayedNum, setDisplayedNum] = useState(0);
+        const [displayedNum, setDisplayedNum] = useState("0");
         const [operator, setOperator] = useState("");
-        const [previouseNum, setPreviouseNum] = useState(0)
+        const [previouseNum, setPreviouseNum] = useState("")
 
        function isInt(n){
         return Number(n) === n && n % 1 ===0;
        }
-       
-    
-        const handleDisplayedNum = (e) => {
-            if(displayedNum === 0) {
-                if(e.target.value === '.'){
-                    if( isInt(displayedNum) === true) {
-                        let num = displayedNum + '.';
-                        setDisplayedNum(num)
-                    } 
 
-                } else {
-                    setDisplayedNum(Number(e.target.value))
-                }
-            } else {
-                if(e.target.value === '.'){
-                    if( isInt(displayedNum) === true) {
-                        let num = displayedNum + '.';
-                        setDisplayedNum(num)
+    
+       
+       //number button handler 
+        const handleDisplayedNum = (e) => {
+            console.log(typeof displayedNum)
+            if(operator === '=') {
+                setDisplayedNum(e.target.value)
+            } else{
+                    if(displayedNum === '0'){
+                        setDisplayedNum(e.target.value)
+                    }else {
+                    let newNum = displayedNum + e.target.value
+                    setDisplayedNum(newNum)
                     }
-                
-                } else{
-                let newNum = displayedNum + e.target.value
-                setDisplayedNum(Number(newNum))
-                 }
-            }
+                }
         }
-        
+        //Operator Button handler
         const handleOperatorButtons = (e) => {
             
            switch(e.target.value) {
             case "AC":
-                setPreviouseNum(0)
-                setDisplayedNum(0)
+                setPreviouseNum('')
+                setDisplayedNum("0")
                 setOperator("")
                 break;
             case "+/-":
                 if(Math.sign(displayedNum) === 1) {
-                    setDisplayedNum(-Math.abs(displayedNum))
+                    let num = -Math.abs(displayedNum)
+                    setDisplayedNum(num.toString())
                 }else {
-                    setDisplayedNum(Math.abs(displayedNum))
+                    let num = Math.abs(displayedNum)
+                    setDisplayedNum(num.toString())
                     
                 }
                 break;
@@ -59,59 +52,64 @@ export default function Body() {
                 setDisplayedNum(displayedNum / 100)
                 break;
             case "/": 
-                if(previouseNum === 0) {
-                    setPreviouseNum(displayedNum)
-                } 
-                setDisplayedNum(0)
+                setPreviouseNum(displayedNum)
+                setDisplayedNum("0")
                 setOperator("/")
                 break;
             case "X":
-                if(previouseNum === 0) {
-                    setPreviouseNum(displayedNum)
-                }
-                setDisplayedNum(0)
+                setPreviouseNum(displayedNum)
+                setDisplayedNum("0")
                 setOperator('X')
                 break;
             case "-":
-                if(previouseNum === 0) {
-                    setPreviouseNum(displayedNum)
-                }
-                setDisplayedNum(0)
+                setPreviouseNum(displayedNum)
+                setDisplayedNum("0")
                 setOperator('-')
                 break;
             case "+":
-                if(previouseNum === 0) {
+            
                 setPreviouseNum(displayedNum)
-                }
-                setDisplayedNum(0)
+                setDisplayedNum("0")
                 setOperator('+')
+                break;
+            case '.':
+                if( isInt(Number(displayedNum)) === true) {
+                    let num = displayedNum + '.';
+                    setDisplayedNum(num)
+                } 
                 break;
             case "=":
                 if(operator === '/') {
-                    setDisplayedNum(previouseNum / displayedNum)
+                    let num = Number(previouseNum) / Number(displayedNum)
+                    setDisplayedNum(num.toString())
+                    setOperator('=')
                     
                 }else if (operator === 'X') {
-                    setDisplayedNum(previouseNum * displayedNum)
-                    
+                    let num = Number(previouseNum) * Number(displayedNum)
+                    setDisplayedNum(num.toString())
+                    setOperator('=')
                 } else if (operator === '+') {
-                    setDisplayedNum(previouseNum + displayedNum)
+                    let num = Number(previouseNum) + Number(displayedNum)
+                    setDisplayedNum(num.toString())
+                    setOperator('=')
                     
                 } else if (operator === '-') {
-                    setDisplayedNum(previouseNum - displayedNum)
-                    
+                    let num = Number(previouseNum) - Number(displayedNum)
+                    setDisplayedNum(num.toString())
+                    setOperator('=')
                 }
                 
                 break;
             case "clear":
-                setDisplayedNum(0)                
+                setDisplayedNum("0")                
                 break;
                 default:
                     alert("You Lose the Game")
            } 
           
-           setPreviouseNum(displayedNum)
+           
         }
-        console.log()
+        
         
 
     return (<>
@@ -124,4 +122,3 @@ export default function Body() {
 
 };
 
-// left off figuring out how to add to a number after alreadying using an operator

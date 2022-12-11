@@ -38,7 +38,7 @@ export default function ButtonFunc(props) {
             <Row>
                 <button onClick={onOperatorButton} value="clear" type="button" className="button">Clear</button>
                 <button onClick={onDisplayedNum} value="0" type="button" className="button">0</button>
-                <button onClick={onDisplayedNum} value="." type="button" className="button">.</button>
+                <button onClick={onOperatorButton} value="." type="button" className="button">.</button>
                 <button onClick={onOperatorButton} value="=" type="button" className="button">=</button>
             </Row>
             
